@@ -1,0 +1,42 @@
+package com.example.android.cleanarchitecturepractice.data.network;
+
+import android.util.Log;
+
+import com.example.android.cleanarchitecturepractice.data.WeatherDto;
+import com.example.android.cleanarchitecturepractice.data.network.model.Weather;
+import com.example.android.cleanarchitecturepractice.data.network.model.WeatherResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ApiMapper {
+    public static final String API_KEY = "36fb2efac1e148468fd131639190202";
+    private RetrofitHelper retrofitHelper;
+
+    public ApiMapper(RetrofitHelper retrofitHelper) {
+        this.retrofitHelper = retrofitHelper;
+    }
+
+    public void getWeatherListAsync(Callback<WeatherResponse> callback) {
+        retrofitHelper.getService().getWeatherList(API_KEY, "moscow", "10", "ru").enqueue(callback);
+    }
+
+    public List<WeatherDto> getWeatherListSync() {
+        try {
+            Response<WeatherResponse> response = retrofitHelper.getService().getWeatherList(API_KEY, "moscow", "10", "ru").execute();
+            if (response.isSuccessful() && response.body() != null) {
+                Log.i(getClass().getSimpleName(), "+++++++++++++++++++++++++++++++ " + response.body().getWeatherList().getItems().size());
+                List<Weather> weatherList = response.body().getWeatherList().getItems();
+                return new DtoConverter().convertAll(weatherList);
+            } else {
+                Log.i(getClass().getSimpleName(), "+++++++++++++++++++++++++++++++ not successful");
+            }
+        } catch (Exception ex) {
+            Log.e(ApiMapper.class.getSimpleName(), "getWeatherListSync: ", ex);
+        }
+        return new ArrayList<>();
+    }
+}
