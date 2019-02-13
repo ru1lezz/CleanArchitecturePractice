@@ -30,7 +30,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         setContentView(R.layout.activity_main);
         mRecyclerView = findViewById(R.id.recycler_view);
         initRecycler();
-        mPresenter = new WeatherPresenter(Executors.newSingleThreadExecutor(), new Handler(Looper.getMainLooper()), this, new WeatherRepositoryImpl());
+        mPresenter = new WeatherPresenter(Executors.newSingleThreadExecutor(),
+                new Handler(Looper.getMainLooper()),
+                this,
+                new WeatherRepositoryImpl());
     }
 
     private void initRecycler() {

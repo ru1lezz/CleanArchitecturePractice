@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.android.cleanarchitecturepractice.R;
 import com.example.android.cleanarchitecturepractice.presentation.view.model.WeatherUIModel;
 import com.squareup.picasso.Picasso;
@@ -40,6 +41,9 @@ class WeatherViewHolder extends RecyclerView.ViewHolder {
         mWeatherDescription.setText(mWeather.getText());
         mWeatherDate.setText(sdf.format(new Date(mWeather.getEpoch() * 1000)));
         String url = "http:" + mWeather.getUrlIcon();
+        Glide.with(itemView)
+                .load(url)
+                .into(imageView);
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.ic_launcher_background)
