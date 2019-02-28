@@ -6,7 +6,7 @@ import com.example.android.cleanarchitecturepractice.domain.Converter;
 
 public class DtoConverter extends Converter<Weather, WeatherDto> {
     @Override
-    protected WeatherDto convert(Weather from) {
+    public WeatherDto convertTo(Weather from) {
         WeatherDto to = new WeatherDto();
         to.setEpoch(from.getEpoch());
         to.setDate(from.getDate());
@@ -17,5 +17,10 @@ public class DtoConverter extends Converter<Weather, WeatherDto> {
         to.setMaxWind(from.getDay().getMaxWind());
         to.setText(from.getDay().getCondition().getText());
         return to;
+    }
+
+    @Override
+    public Weather convertFrom(WeatherDto to) {
+        return null;
     }
 }

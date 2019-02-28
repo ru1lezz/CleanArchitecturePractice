@@ -24,15 +24,14 @@ public class ApiMapper {
         retrofitHelper.getService().getWeatherList(API_KEY, "moscow", "10", "ru").enqueue(callback);
     }
 
-    public List<WeatherDto> getWeatherListSync() {
+    public List<WeatherDto> getWeatherListSync(String city, String days) {
         try {
-            Response<WeatherResponse> response = retrofitHelper.getService().getWeatherList(API_KEY, "moscow", "10", "ru").execute();
+            Response<WeatherResponse> response = retrofitHelper.getService().getWeatherList(API_KEY, city, days, "ru").execute();
             if (response.isSuccessful() && response.body() != null) {
-                Log.i(getClass().getSimpleName(), "+++++++++++++++++++++++++++++++ " + response.body().getWeatherList().getItems().size());
                 List<Weather> weatherList = response.body().getWeatherList().getItems();
-                return new DtoConverter().convertAll(weatherList);
+                return new DtoConverter().convertToAll(weatherList);
             } else {
-                Log.i(getClass().getSimpleName(), "+++++++++++++++++++++++++++++++ not successful");
+                Log.i(getClass().getSimpleName(), "not successful");
             }
         } catch (Exception ex) {
             Log.e(ApiMapper.class.getSimpleName(), "getWeatherListSync: ", ex);

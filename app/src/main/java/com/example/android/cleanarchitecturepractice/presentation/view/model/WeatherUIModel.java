@@ -9,6 +9,8 @@ public class WeatherUIModel {
     private double maxTemp;
     private String urlIcon;
     private String text;
+    private double maxWind;
+    private double avgHumidity;
 
     public long getEpoch() {
         return epoch;
@@ -58,6 +60,14 @@ public class WeatherUIModel {
         this.text = text;
     }
 
+    public double getMaxWind() {
+        return maxWind;
+    }
+
+    public void setMaxWind(double maxWind) {
+        this.maxWind = maxWind;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +76,8 @@ public class WeatherUIModel {
         return epoch == that.epoch &&
                 Double.compare(that.minTemp, minTemp) == 0 &&
                 Double.compare(that.maxTemp, maxTemp) == 0 &&
+                Double.compare(that.maxWind, maxWind) == 0 &&
+                Double.compare(that.avgHumidity, avgHumidity) == 0 &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(urlIcon, that.urlIcon) &&
                 Objects.equals(text, that.text);
@@ -73,7 +85,14 @@ public class WeatherUIModel {
 
     @Override
     public int hashCode() {
+        return Objects.hash(epoch, date, minTemp, maxTemp, urlIcon, text, maxWind, avgHumidity);
+    }
 
-        return Objects.hash(epoch, date, minTemp, maxTemp, urlIcon, text);
+    public double getAvgHumidity() {
+        return avgHumidity;
+    }
+
+    public void setAvgHumidity(double avgHumidity) {
+        this.avgHumidity = avgHumidity;
     }
 }

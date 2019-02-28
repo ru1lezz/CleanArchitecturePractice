@@ -44,10 +44,6 @@ class WeatherViewHolder extends RecyclerView.ViewHolder {
         Glide.with(itemView)
                 .load(url)
                 .into(imageView);
-        Picasso.get()
-                .load(url)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imageView);
     }
 }
 

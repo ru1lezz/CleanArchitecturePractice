@@ -5,13 +5,23 @@ import java.util.List;
 
 public abstract class Converter<From, To> {
 
-    protected abstract To convert(From from);
+    public abstract To convertTo(From from);
 
-    public final List<To> convertAll(List<From> from) {
+    public abstract From convertFrom(To to);
+
+    public final List<To> convertToAll(List<From> from) {
         List<To> to = new ArrayList<>();
         for(From item : from) {
-            to.add(convert(item));
+            to.add(convertTo(item));
         }
         return to;
+    }
+
+    public final List<From> convertFromAll(List<To> to) {
+        List<From> from = new ArrayList<>();
+        for(To item : to) {
+            from.add(convertFrom(item));
+        }
+        return from;
     }
 }

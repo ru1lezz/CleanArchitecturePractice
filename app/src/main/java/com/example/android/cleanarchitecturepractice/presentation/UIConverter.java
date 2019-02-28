@@ -1,4 +1,4 @@
-package com.example.android.cleanarchitecturepractice.presentation.view;
+package com.example.android.cleanarchitecturepractice.presentation;
 
 import com.example.android.cleanarchitecturepractice.domain.Converter;
 import com.example.android.cleanarchitecturepractice.domain.model.Weather;
@@ -7,7 +7,7 @@ import com.example.android.cleanarchitecturepractice.presentation.view.model.Wea
 public class UIConverter extends Converter<Weather, WeatherUIModel> {
 
     @Override
-    protected WeatherUIModel convert(Weather from) {
+    public WeatherUIModel convertTo(Weather from) {
         WeatherUIModel to = new WeatherUIModel();
         to.setDate(from.getDate());
         to.setEpoch(from.getEpoch());
@@ -15,6 +15,13 @@ public class UIConverter extends Converter<Weather, WeatherUIModel> {
         to.setMinTemp(from.getMinTemp());
         to.setText(from.getText());
         to.setUrlIcon(from.getIconUrl());
+        to.setAvgHumidity(from.getAvgHumidity());
+        to.setMaxWind(from.getMaxWind());
         return to;
+    }
+
+    @Override
+    public Weather convertFrom(WeatherUIModel weatherUIModel) {
+        return null;
     }
 }

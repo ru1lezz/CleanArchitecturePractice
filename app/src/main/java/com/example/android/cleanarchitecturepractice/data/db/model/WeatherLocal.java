@@ -1,17 +1,22 @@
-package com.example.android.cleanarchitecturepractice.data;
+package com.example.android.cleanarchitecturepractice.data.db.model;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Objects;
 
-public class WeatherDto {
+@Entity
+public class WeatherLocal {
+    @PrimaryKey
     private long epoch;
     private String date;
+    private String city;
     private double maxTemp;
     private double minTemp;
     private double maxWind;
     private double avgHumidity;
     private String text;
     private String iconUrl;
-    private String city;
 
     public long getEpoch() {
         return epoch;
@@ -27,6 +32,14 @@ public class WeatherDto {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public double getMaxTemp() {
@@ -77,32 +90,24 @@ public class WeatherDto {
         this.iconUrl = iconUrl;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WeatherDto that = (WeatherDto) o;
-        return epoch == that.epoch &&
-                Double.compare(that.maxTemp, maxTemp) == 0 &&
-                Double.compare(that.minTemp, minTemp) == 0 &&
-                Double.compare(that.maxWind, maxWind) == 0 &&
-                Double.compare(that.avgHumidity, avgHumidity) == 0 &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(text, that.text) &&
-                Objects.equals(iconUrl, that.iconUrl) &&
-                Objects.equals(city, that.city);
+        WeatherLocal weatherLocal = (WeatherLocal) o;
+        return epoch == weatherLocal.epoch &&
+                Double.compare(weatherLocal.maxTemp, maxTemp) == 0 &&
+                Double.compare(weatherLocal.minTemp, minTemp) == 0 &&
+                Double.compare(weatherLocal.maxWind, maxWind) == 0 &&
+                Double.compare(weatherLocal.avgHumidity, avgHumidity) == 0 &&
+                Objects.equals(date, weatherLocal.date) &&
+                Objects.equals(city, weatherLocal.city) &&
+                Objects.equals(text, weatherLocal.text) &&
+                Objects.equals(iconUrl, weatherLocal.iconUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(epoch, date, maxTemp, minTemp, maxWind, avgHumidity, text, iconUrl, city);
+        return Objects.hash(epoch, date, city, maxTemp, minTemp, maxWind, avgHumidity, text, iconUrl);
     }
 }
