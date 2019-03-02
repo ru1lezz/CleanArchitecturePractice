@@ -19,6 +19,7 @@ import com.example.android.cleanarchitecturepractice.R;
 import com.example.android.cleanarchitecturepractice.data.repository.SharedPrefRepositoryImpl;
 import com.example.android.cleanarchitecturepractice.data.repository.WeatherRepositoryImpl;
 import com.example.android.cleanarchitecturepractice.presentation.presenter.weatherlist.WeatherListPresenter;
+import com.example.android.cleanarchitecturepractice.presentation.view.detailedweather.DetailedWeatherActivity;
 import com.example.android.cleanarchitecturepractice.presentation.view.model.WeatherUIModel;
 
 import java.util.List;

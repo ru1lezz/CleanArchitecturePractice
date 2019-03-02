@@ -29,7 +29,7 @@ public class ApiMapper {
             Response<WeatherResponse> response = retrofitHelper.getService().getWeatherList(API_KEY, city, days, "ru").execute();
             if (response.isSuccessful() && response.body() != null) {
                 List<Weather> weatherList = response.body().getWeatherList().getItems();
-                return new DtoConverter().convertToAll(weatherList);
+                return new DtoConverter(city).convertToAll(weatherList);
             } else {
                 Log.i(getClass().getSimpleName(), "not successful");
             }

@@ -1,6 +1,5 @@
 package com.example.android.cleanarchitecturepractice.data;
 
-import com.example.android.cleanarchitecturepractice.data.WeatherDto;
 import com.example.android.cleanarchitecturepractice.domain.Converter;
 import com.example.android.cleanarchitecturepractice.domain.model.Weather;
 
@@ -8,6 +7,7 @@ public class DomainWeatherConverter extends Converter<WeatherDto, Weather> {
     @Override
     public Weather convertTo(WeatherDto from) {
         Weather to = new Weather();
+        to.setCity(from.getCity());
         to.setEpoch(from.getEpoch());
         to.setDate(from.getDate());
         to.setAvgHumidity(from.getAvgHumidity());
@@ -22,6 +22,7 @@ public class DomainWeatherConverter extends Converter<WeatherDto, Weather> {
     @Override
     public WeatherDto convertFrom(Weather weather) {
         WeatherDto from = new WeatherDto();
+        from.setCity(weather.getCity());
         from.setAvgHumidity(weather.getAvgHumidity());
         from.setDate(weather.getDate());
         from.setEpoch(weather.getEpoch());

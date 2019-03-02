@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.android.cleanarchitecturepractice.R;
+import com.example.android.cleanarchitecturepractice.presentation.view.detailedweather.DetailedWeatherActivity;
 import com.example.android.cleanarchitecturepractice.presentation.view.model.WeatherUIModel;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-class WeatherViewHolder extends RecyclerView.ViewHolder {
+class WeatherViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private ImageView imageView;
     private TextView mWeatherDate, mMaxTemperature, mLowTemperature, mWeatherDescription;
     private WeatherUIModel mWeather;
@@ -23,6 +24,7 @@ class WeatherViewHolder extends RecyclerView.ViewHolder {
     public WeatherViewHolder(@NonNull View itemView) {
         super(itemView);
         initViews(itemView);
+        itemView.setOnClickListener(this);
     }
 
     private void initViews(View itemView) {
@@ -44,6 +46,12 @@ class WeatherViewHolder extends RecyclerView.ViewHolder {
         Glide.with(itemView)
                 .load(url)
                 .into(imageView);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = DetailedWeatherActivity.newIntent(v.getContext(), mWeather.getCity(), mWeather.getEpoch());
+        v.getContext().startActivity(intent);
     }
 }
-

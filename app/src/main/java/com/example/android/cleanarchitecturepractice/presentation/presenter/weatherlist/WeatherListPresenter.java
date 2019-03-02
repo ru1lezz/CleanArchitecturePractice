@@ -8,9 +8,10 @@ import com.example.android.cleanarchitecturepractice.domain.SharedPrefRepository
 import com.example.android.cleanarchitecturepractice.domain.WeatherRepository;
 import com.example.android.cleanarchitecturepractice.domain.interactor.GetSharedPrefInteractor;
 import com.example.android.cleanarchitecturepractice.domain.interactor.GetWeatherListInteractor;
+import com.example.android.cleanarchitecturepractice.domain.interactor.SetSharedPrefInteractor;
 import com.example.android.cleanarchitecturepractice.domain.model.Weather;
 import com.example.android.cleanarchitecturepractice.presentation.DomainSharedPrefConverter;
-import com.example.android.cleanarchitecturepractice.presentation.UIConverter;
+import com.example.android.cleanarchitecturepractice.presentation.WeatherUIModelConverter;
 import com.example.android.cleanarchitecturepractice.presentation.presenter.AbstractPresenter;
 import com.example.android.cleanarchitecturepractice.presentation.presenter.BasePresenter;
 import com.example.android.cleanarchitecturepractice.presentation.view.model.SharedPref;
@@ -48,7 +49,7 @@ public class WeatherListPresenter extends AbstractPresenter implements BasePrese
         mExecutorService.execute(() -> {
             GetWeatherListInteractor getWeatherListInteractor = new GetWeatherListInteractor(sharedPref.getCity(), String.valueOf(sharedPref.getDays() + 1), mWeatherRepository);
             List<Weather> weatherList = getWeatherListInteractor.execute();
-            List<WeatherUIModel> newList = new UIConverter().convertToAll(weatherList);
+            List<WeatherUIModel> newList = new WeatherUIModelConverter().convertToAll(weatherList);
             mHandler.post(() -> {
                 mView.displayWeatherList(newList);
                 mView.setCity(sharedPref.getCity());
@@ -72,9 +73,10 @@ public class WeatherListPresenter extends AbstractPresenter implements BasePrese
         mExecutorService.execute(() -> {
             GetWeatherListInteractor getWeatherListInteractor = new GetWeatherListInteractor(sharedPref.getCity(), String.valueOf(sharedPref.getDays()), mWeatherRepository);
             List<Weather> weatherList = getWeatherListInteractor.execute();
-            List<WeatherUIModel> newList = new UIConverter().convertToAll(weatherList);
+            List<WeatherUIModel> newList = new WeatherUIModelConverter().convertToAll(weatherList);
             mHandler.post(() -> mView.displayWeatherList(newList));
         });
+        new SetSharedPrefInteractor(sharedPrefRepository, new DomainSharedPrefConverter().convertTo(sharedPref)).execute();
     }
 
     public void onSpinnerItemSelected(int days) {

@@ -5,9 +5,16 @@ import com.example.android.cleanarchitecturepractice.data.network.model.Weather;
 import com.example.android.cleanarchitecturepractice.domain.Converter;
 
 public class DtoConverter extends Converter<Weather, WeatherDto> {
+    private final String city;
+
+    public DtoConverter(String city) {
+        this.city = city;
+    }
+
     @Override
     public WeatherDto convertTo(Weather from) {
         WeatherDto to = new WeatherDto();
+        to.setCity(city);
         to.setEpoch(from.getEpoch());
         to.setDate(from.getDate());
         to.setAvgHumidity(from.getDay().getAvgHumidity());

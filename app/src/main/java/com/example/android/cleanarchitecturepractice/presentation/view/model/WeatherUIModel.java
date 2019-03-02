@@ -3,6 +3,7 @@ package com.example.android.cleanarchitecturepractice.presentation.view.model;
 import java.util.Objects;
 
 public class WeatherUIModel {
+    private String city;
     private long epoch;
     private String date;
     private double minTemp;
@@ -11,6 +12,14 @@ public class WeatherUIModel {
     private String text;
     private double maxWind;
     private double avgHumidity;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public long getEpoch() {
         return epoch;
@@ -68,6 +77,14 @@ public class WeatherUIModel {
         this.maxWind = maxWind;
     }
 
+    public double getAvgHumidity() {
+        return avgHumidity;
+    }
+
+    public void setAvgHumidity(double avgHumidity) {
+        this.avgHumidity = avgHumidity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,6 +95,7 @@ public class WeatherUIModel {
                 Double.compare(that.maxTemp, maxTemp) == 0 &&
                 Double.compare(that.maxWind, maxWind) == 0 &&
                 Double.compare(that.avgHumidity, avgHumidity) == 0 &&
+                Objects.equals(city, that.city) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(urlIcon, that.urlIcon) &&
                 Objects.equals(text, that.text);
@@ -85,14 +103,6 @@ public class WeatherUIModel {
 
     @Override
     public int hashCode() {
-        return Objects.hash(epoch, date, minTemp, maxTemp, urlIcon, text, maxWind, avgHumidity);
-    }
-
-    public double getAvgHumidity() {
-        return avgHumidity;
-    }
-
-    public void setAvgHumidity(double avgHumidity) {
-        this.avgHumidity = avgHumidity;
+        return Objects.hash(city, epoch, date, minTemp, maxTemp, urlIcon, text, maxWind, avgHumidity);
     }
 }

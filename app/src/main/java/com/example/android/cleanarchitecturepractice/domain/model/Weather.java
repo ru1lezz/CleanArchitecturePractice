@@ -5,6 +5,7 @@ import com.example.android.cleanarchitecturepractice.data.WeatherDto;
 import java.util.Objects;
 
 public class Weather {
+    private String city;
     private long epoch;
     private String date;
     private double maxTemp;
@@ -13,6 +14,14 @@ public class Weather {
     private double avgHumidity;
     private String text;
     private String iconUrl;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public long getEpoch() {
         return epoch;
@@ -82,20 +91,20 @@ public class Weather {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Weather that = (Weather) o;
-        return epoch == that.epoch &&
-                Double.compare(that.maxTemp, maxTemp) == 0 &&
-                Double.compare(that.minTemp, minTemp) == 0 &&
-                Double.compare(that.maxWind, maxWind) == 0 &&
-                Double.compare(that.avgHumidity, avgHumidity) == 0 &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(text, that.text) &&
-                Objects.equals(iconUrl, that.iconUrl);
+        Weather weather = (Weather) o;
+        return epoch == weather.epoch &&
+                Double.compare(weather.maxTemp, maxTemp) == 0 &&
+                Double.compare(weather.minTemp, minTemp) == 0 &&
+                Double.compare(weather.maxWind, maxWind) == 0 &&
+                Double.compare(weather.avgHumidity, avgHumidity) == 0 &&
+                Objects.equals(city, weather.city) &&
+                Objects.equals(date, weather.date) &&
+                Objects.equals(text, weather.text) &&
+                Objects.equals(iconUrl, weather.iconUrl);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(epoch, date, maxTemp, minTemp, maxWind, avgHumidity, text, iconUrl);
+        return Objects.hash(city, epoch, date, maxTemp, minTemp, maxWind, avgHumidity, text, iconUrl);
     }
 }

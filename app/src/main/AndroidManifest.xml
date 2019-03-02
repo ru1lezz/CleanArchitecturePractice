@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".presentation.view.detailedweather.DetailedWeatherActivity"></activity>
         <activity android:name=".presentation.view.weathers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
